@@ -169,9 +169,14 @@ header{
     font-family: 'SCoreDream6';
 }
 
-
 section{
     height: 100vh;
     background-color: #7FAD6F;
+}
+
+section#HOME{
+    background-image: url(./image/intro_bg.jpg);
+    background-position: center;
+    background-size: cover;
 }
 
