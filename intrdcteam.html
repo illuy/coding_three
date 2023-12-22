@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>section02</title>
 
     <style>
         h1 {
@@ -40,9 +40,17 @@
             grid-template-rows: 150px;
         }
 
+        @media screen and (max-width: 550px) {
+            h1 {
+                font-size: 32px;
+            }
+            #h {
+                font-size: 18px;
+            }
+        }
         #grid_hz {
             display: grid;
-            grid-template-columns: 800px 350px;
+            grid-template-columns: 1fr 1fr;
         }
         
         .img {
@@ -54,7 +62,7 @@
 </head>
 
 <body>
-    <div>
+    <div class="title">
         <h1>CODING T<span id="h">h</span>REE</h1>
         <h5>코딩 꿈나무들의 REACT 정복</h5>
     </div>

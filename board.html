@@ -7,24 +7,10 @@
     <title>coding_three</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
     <style>
-        .wSelectIcon {
-            background-color: #ffffff;
-            border: 1px solid grey;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 10px;
-            margin-right: 20px;
-            width: 130px;
-        }
-
-        .wSelectIcon>select {
-            width: 130px;
-        }
-
         .write {
             background-color: aqua;
             border: 2px solid #000000;
@@ -39,7 +25,10 @@
         .wForm1 {
             background-color: green;
             width: 25%;
+            display: flex;
+            flex-direction: column;
             text-align: center;
+            align-items: center;
         }
 
         .wForm2 {
@@ -56,11 +45,12 @@
         }
 
         .wSelectIcon {
-            width: 130px;
+            width: 150px;
+            background-color: #000000;
         }
 
         .wSelectIcon>select {
-            width: 130px;
+            width: 150px;
         }
 
         .wBtn {
@@ -125,7 +115,7 @@
             <div class="wIconPview">
                 <img id="myIcon" src="gb_icon.jpg" width="150">
             </div>
-            <div class="wselectIcon">
+            <div class="wSelectIcon">
                 <select id="changeIcon" onchange="changeIcon()">
                     <option value="gb_icon.jpg" selected>고양이1</option>
                     <option value="gb_icon2.jpg">고양이2</option>
@@ -152,33 +142,66 @@
             </div>
             <div class="wBtn">
                 <button type="button" id="btn_post" class="btn btn-primary">등록</button>
-                <button type="button" id="btn_reset" class="btn btn-primary">리셋</button>
+                <button type="button" id="btn_reset" class="btn btn-primary" onclick="resetForm()">리셋</button>
             </div>
+
+            <!--리셋 버튼 스크립트-->
+            <script>
+                function resetForm() {
+                    var formControls = document.getElementsByClassName('form-control');
+                    for (var i = 0; i < formControls.length; i++) {
+                        formControls[i].value = "";
+                    }
+                }
+            </script>
+
         </div>
     </div>
 
     <!--게시글 표시 영역-->
-    <div class="posts" class="col-md-6" id="posts">
-        <div class="pIcon">
-            <img src="gb_icon.jpg" width="80" style="border:2px solid #000000;">
-        </div>
-        <div class="pContent">
-            <div class="pName" id="pName">
-                <h4>이름</h4>
+    <!-- <div class="posts" class="col-md-6" id="posts">
+            <div class="pIcon">
+                <img src="gb_icon.jpg" width="80" style="border:2px solid #000000;">
             </div>
-            <div class="pComment" id="pComment">
-                <p>방명록 내용 내용 내용</p>
-                <div class="pControl">
-                    <p><span style="color:grey">작성일 2023.12.22</span></p>
-                    <button type="button" data-cdid=${doc.id} class="bh_edit_btn btn btn-primary ">수정하기</button>
-                    <button type="button" data-cdid=${doc.id} class="bh_del_btn btn btn-secondary">삭제하기</button>
+            <div class="pContent">
+                <div class="pName" id="pName">
+                    <h4>이름</h4>
                 </div>
-                </p>
+                <div class="pComment" id="pComment">
+                    <p>방명록 내용 내용 내용</p>
+                    <div class="pControl">
+                        <p><span style="color:grey">작성일 2023.12.22</span></p>
+                        <button type="button" data-cdid=${doc.id} class="bh_edit_btn btn btn-primary ">수정하기</button>
+                        <button type="button" data-cdid=${doc.id} class="bh_del_btn btn btn-secondary">삭제하기</button>
+                    </div>
+                </div>
             </div>
-        </div>
+        </div> -->
+    <div class="postsGroup" id="postsGroup">
+        <!--게시글 표시 영역-->
+    </div>
     </div>
 
-    <script>
+    <script type="module">
+        //Firebase SDK 라이브러리 가져오기
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
+        import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
+        import { collection, addDoc, getDocs, getDoc, doc, updateDoc, deleteDoc, setDoc } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDsHUgRONE099dI_cbgXTzunmAg3XGMP2k",
+            authDomain: "coding-three.firebaseapp.com",
+            projectId: "coding-three",
+            storageBucket: "coding-three.appspot.com",
+            messagingSenderId: "597951423527",
+            appId: "1:597951423527:web:286f4c263055374ba81a02"
+        }
+
+        // Firebase 인스턴스 초기화
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+
         //아이콘 드롭다운
         let changeimg = document.getElementById("changeIcon");
         let myImg = document.getElementById("myIcon");
@@ -191,14 +214,108 @@
         changeIcon();
         changeimg.onchange = changeIcon;
 
-        //등록 버튼 클릭시
+        //페이지 로드 시 방명록 포스트들 불러오기
+        let readDocs = await getDocs(collection(db, 'coding-three'));
+        readDocs.forEach((doc) => {
+
+            let row = doc.data();
+
+            let wName = row['이름'];
+            let wPassword = row['비밀번호'];
+            let wComment = row['내용'];
+            let wDate = row['작성일'];
+            let wIcon = row['아이콘'];
+
+            let temp_html = `
+        <div class="posts col-md-6" id="posts">
+            <div class="pIcon">
+                <img src="${wIcon}" width="80" style="border:2px solid #000000;">
+            </div>
+            <div class="pContent">
+                <div class="pName" id="pName">
+                    <h4>${wName}</h4>
+                </div>
+                <div class="pComment" id="pComment">
+                    <p>${wComment}</p>
+                    <div class="pControl">
+                        <p><span style="color:grey">${wDate}</span></p>
+                        <button type="button" id="btn_edit" data-cdid=${doc.id} class="bh_edit_btn btn btn-primary ">수정하기</button>
+                        <button type="button" id="btn_delete" data-cdid=${doc.id} class="bh_del_btn btn btn-secondary" onclick="deletePost('${doc.id}')">삭제하기</button>
+                    </div>
+                </div>
+            </div>
+        </div>`;
+            $('#postsGroup').prepend(temp_html);
+        });
+
+
+        //등록 버튼 클릭 시 파이어베이스에 아래의 데이터를 업로드
         $('#btn_post').click(async function () {
             const data = {
                 wName: $('#wName').val(),
                 wPassword: $('#wPassword').val(),
                 wComment: $('#wComment').val(),
+                wIcon: $('#changeIcon option:selected').val(),
+            };
+
+            if (!data.wName || !data.wPassword || !data.wComment) {
+                alert('이름, 비밀번호, 내용을 모두 입력해주세요.');
+                return;
             }
+
+            console.log(data.wName)
+            let date = new Date();
+            let wDate = date.getFullYear().toString() + ". " + (date.getMonth() + 1).toString().padStart(2, '0') + ". " + date.getDate().toString().padStart(2, '0');
+            let docId = date.toString().split(' ').join('');
+
+            let my_doc = {
+                '이름': data.wName,
+                '비밀번호': data.wPassword,
+                '내용': data.wComment,
+                '작성일': wDate,
+                '아이콘': data.wIcon,
+            };
+
+            await setDoc(doc(db, "coding-three", docId), my_doc);
+            alert('게시글이 등록되었습니다.');
+
+            window.location.reload();
         })
+
+
+        //삭제 버튼 눌렀을 때
+        async function deletePost(doc_id, data) {
+            const really = prompt("작성 시 입력한 비밀번호를 입력하세요." + "");
+            if (really === 'codingthree' || really == data.wPassword) {
+                try {
+                    await deleteDoc(doc(collection(db, 'coding-three', doc_id)));
+                    alert('삭제되었습니다.');
+                    window.location.reload();
+                } catch (error) {
+                    console.error('삭제 중 오류 발생:', error);
+                    alert('삭제 중 오류가 발생했습니다.');
+                }
+            } else {
+                alert('비밀번호가 일치하지 않습니다.');
+            }
+        }
+
+        // $('#btn_delete').click(async function () {
+
+        //     let dataId = $(this).data("id");
+        //     let id_doc = await getDoc(doc(db, "coding-three", dataId));
+        //     let row = id_doc.data();
+        //     let wPassword = row.wPassword;
+
+        //     const really = prompt("작성 시 입력한 비밀번호를 입력하세요." + "");
+        //     if (really === 'codingthree' || really == wPassword) {
+        //         deleteDoc(doc(db, "coding-three", dataId)).then(() => {
+        //             window.location.reload();
+        //         });
+        //     } else {
+        //         alert('비밀번호가 일치하지 않습니다.');
+        //     }
+        // });
     </script>
 </body>
 
