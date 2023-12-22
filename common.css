@@ -163,7 +163,7 @@ header{
 }
 @keyframes sun02{
     0%{transform: rotate(0deg);}
-    100%{transform: rotate(365deg);}
+    100%{transform: rotate(360deg);}
 }
 .main_nav ul{
     display: flex;
