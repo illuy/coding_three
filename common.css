@@ -169,7 +169,44 @@ header {
     left: -10px;
     transform: translate(0, -50%);
 }
-
+.sun::after{
+    content: '';
+    display: block;
+    position: absolute;
+    width: 20px;
+    height: 5px;
+    border-radius: 50%;
+    /* border:1px solid red; */
+    background-color: red;
+    opacity: 0;
+    top:58%;
+    left:22px;
+    transform: translate(0%,0%);
+    z-index: 1000;
+    transition: 0.5s;
+}
+.sun::before{
+    content: '';
+    display: block;
+    position: absolute;
+    width: 20px;
+    height: 5px;
+    border-radius: 50%;
+    /* border:1px solid red; */
+    background-color: red;
+    opacity: 0;
+    top:58%;
+    right:15px;
+    transform: translate(0%,0%);
+    z-index: 1000;
+    transition: 0.5s;
+}
+.sun:hover::after{
+   opacity: 0.5;
+}
+.sun:hover::before{
+    opacity: 0.5;
+ }
 .sun img {
     position: absolute;
 }
@@ -187,7 +224,9 @@ header {
         transform: rotate(360deg);
     }
 }
-
+.sun:hover img.sun02{
+    animation-duration: 2s ;
+}
 .main_nav ul {
     display: flex;
     flex-direction: row;
