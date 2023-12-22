@@ -196,15 +196,18 @@ section#HOME{
     text-align: center;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
 }
 
 #HOME h2{text-transform: uppercase;font-family: 'SCoreDream8';font-size: 86px;}
 #HOME h5{font-size: 26px;}
+#HOME .title{
+    margin-top:150px;
+}
 .home_member_img{
-    margin:100px 0;
+    margin-bottom:100px;
 }
 .home_member_img img{
-    margin:0 20px;
+    margin:0 5px;
 }
