@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>PERSI</title>
+        <link rel="stylesheet" href="main.css?after" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous" />
+        <script
+            src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+    </head>
+
+    <body style="background-image: linear-gradient(to bottom, #fff1eb 0%, #ace0f9 100%)">
+        <div class="modal modalBackground" id="mateView" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content" style="background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)">
+                    <div class="modal-header">
+                        <h4 class="modal-title dongle" style="font-size: 40px; line-height: 30px">Our Members</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div style="margin: 10px 0px 30px 0px">
+                            <div class="modalbody-left">
+                                <div class="modal-img">
+                                    <!-- jjh 각 요소에 id 값 추가 -->
+                                    <img id="md_view_img" src="img/Ken.png" width="160" height="160" />
+                                </div>
+                            </div>
+                            <div class="modalbody-right">
+                                <div>
+                                    <strong class="dongle" style="font-size: 28px">이름</strong>
+                                    <p id="md_view_name" class="dongle" style="font-size: 28px; line-height: 20px">장준혁</p>
+                                </div>
+                                <div>
+                                    <strong class="dongle" style="font-size: 28px">나이</strong>
+                                    <p id="md_view_age" class="dongle" style="font-size: 28px; line-height: 20px">31</p>
+                                </div>
+                                <div>
+                                    <strong class="dongle" style="font-size: 28px">거주지</strong>
+                                    <p id="md_view_residence" class="dongle" style="font-size: 28px; line-height: 20px">서울시 양천구</p>
+                                </div>
+                                <div>
+                                    <strong class="dongle" style="font-size: 28px">MBTI</strong>
+                                    <p id="md_view_mbti" class="dongle" style="font-size: 28px; line-height: 20px">ENFP</p>
+                                </div>
+                                <div>
+                                    <strong class="dongle" style="font-size: 28px">장점</strong>
+                                    <p id="md_view_good" class="dongle" style="font-size: 28px; line-height: 20px">굿굿</p>
+                                </div>
+                                <div>
+                                    <strong class="dongle" style="font-size: 28px">협업 스타일</strong>
+                                    <p id="md_view_costyle" class="dongle" style="font-size: 28px; line-height: 20px">협업협업</p>
+                                </div>
+                                <div>
+                                    <strong class="dongle" style="font-size: 28px">블로그 주소</strong>
+                                    <p>
+                                        <a href="https://velog.io/@yeong0227" id="md_view_blog" class="dongle" style="font-size: 28px; line-height: 20px"
+                                            >https://www.naver.com/</a
+                                        >
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="mbodyfooter"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal modalBackground" id="mateModify" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!--jjh 데이터 속성 추가 -->
+                        <h5 id="md_edit_memNo" data-memNo="0" class="modal-title">멤버 소개</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div style="margin: 20px 0px 20px 0px">
+                            <div class="modalbody">
+                                <form>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="md_edit_img" placeholder="이미지" />
+                                        <label for="md_edit_img">이미지 주소</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="md_edit_name" placeholder="이름" />
+                                        <label for="md_edit_name">이름</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="md_edit_age" placeholder="나이" />
+                                        <label for="md_edit_age">나이</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="md_edit_residence" placeholder="거주지" />
+                                        <label for="md_edit_residence">거주지</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="md_edit_mbti" placeholder="MBTI" />
+                                        <label for="md_edit_mbti">MBTI</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="md_edit_good" placeholder="장점" />
+                                        <label for="md_edit_good">장점</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="md_edit_costyle" placeholder="협업 스타일" />
+                                        <label for="md_edit_costyle">협업 스타일</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="md_edit_blog" placeholder="블로그 주소" />
+                                        <label for="md_edit_blog"> 블로그 주소</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="md_edit_comment" placeholder="자기소개" />
+                                        <label for="md_edit_comment">자기소개</label>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="modifyModalClose" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" id="modifyModalSave" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal modalBackground" id="behindModify" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">일지 수정</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="bh_edit_img" placeholder="이미지" />
+                            <label for="bh_edit_img">이미지 주소</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="bh_edit_title" placeholder="제목" />
+                            <label for="bh_edit_title">제목</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="date" class="form-control" id="bh_edit_date" placeholder="날짜" />
+                            <label for="bh_edit_date">날짜</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="bh_edit_comment" placeholder="내용" />
+                            <label for="bh_edit_comment">내용</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="bh_edit_save btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="empty_div">
+            <div>
+                <img src="img/unsplash_jxelyjTrWFg.png" />
+            </div>
+        </div>
+        <div class="px-4 py-5 my-5 text-center" style="background-color: transparent">
+            <div>
+                <img src="img/PERSI Logo.png" />
+            </div>
+            <div class="col-lg-6 mx-auto">
+                <p class="lead mb-4">버튼을 눌러 원하는 정보를 확인해보세요.</p>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                    <button type="button" class="btn btn-primary btn-lg px-4 gap-3" id="mainbtn">메인</button>
+                    <button type="button" class="btn btn-primary btn-lg px-4 gap-3" id="teambtn">팀 소개</button>
+                    <button type="button" class="btn btn-primary btn-lg px-4 gap-3" id="teammatebtn">팀원 소개</button>
+                    <button type="button" class="btn btn-primary btn-lg px-4 gap-3" id="behindbtn">개발 후기</button>
+                </div>
+            </div>
+        </div>
+        <div class="container my-5 none" id="team_div" style="background-color: transparent; height: 100%; overflow: auto">
+            <div class="p-5 text-center rounded-3">
+                <p class="lilita-one">PERSI = Persistent</p>
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <div class="col">
+                        <div class="card" style="background-color: white; border: 2px grey">
+                            <div class="card-body">
+                                <div class="p-3">
+                                    <img src="img/fluent_communication-person-20-filled.png" />
+                                </div>
+                                <h5 class="card-title dongle" style="font-size: 48px">계속하다</h5>
+                                <p class="card-text dongle" style="font-size: 32px">개발을 함께 계속하기 위해 서로 소통합니다.</p>
+                                <p class="card-text dongle" style="font-size: 32px">지속 가능한 개발을 위해 배려를 '계속합니다'.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card" style="background-color: white; border: 2px grey">
+                            <div class="card-body">
+                                <div class="p-3">
+                                    <img src="img/lucide_goal.png" />
+                                </div>
+                                <h5 class="card-title dongle" style="font-size: 48px">고집</h5>
+                                <p class="card-text dongle" style="font-size: 32px">목표에 대한 고집이 있습니다.</p>
+                                <p class="card-text dongle" style="font-size: 32px">목표를 위해 끝까지 정진합니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card" style="background-color: white; border: 2px grey">
+                            <div class="card-body">
+                                <div class="p-3">
+                                    <img src="img/gis_hiker.png" />
+                                </div>
+                                <h5 class="card-title dongle" style="font-size: 48px">인내</h5>
+                                <p class="card-text dongle" style="font-size: 32px">목표에 이르기까지의 과정을 견뎌냅니다.</p>
+                                <p class="card-text dongle" style="font-size: 32px">동료들과 함께 인내하며 단단해집니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="album py-5 none" id="teammate_div" style="background-color: transparent; height: 600px; overflow: auto">
+            <div style="text-align: center">
+                <strong class="dongle" style="font-size: 60px">팀원 소개</strong>
+            </div>
+            <div class="container">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    <div class="col">
+                        <div class="card shadow-sm" style="height: 360px">
+                            <img class="cd_view_img" src="img/Ken.png" width="100%" height="225" style="border-radius: 5px 5px 0px 0px" />
+                            <div class="card-body">
+                                <p class="cd_view_comment card-text">
+                                    This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit
+                                    longer.
+                                </p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <!--jjh 데이터 속성 추가 , 클래스 viewbtn 추가 -->
+                                        <button data-memNo="0" type="button" class="viewbtn btn btn-sm btn-outline-secondary viewmodal">보기</button>
+                                        <button data-memNo="0" type="button" class="editbtn btn btn-sm btn-outline-secondary modifymodal">수정</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card shadow-sm" style="height: 360px">
+                            <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
+                            xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
+                            preserveAspectRatio="xMidYMid slice" focusable="false">
+                            <title>Placeholder</title>
+                            <rect width="100%" height="100%" fill="#55595c"></rect>
+                            <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+                        </svg> -->
+                            <img class="cd_view_img" src="img/Ken.png" width="100%" height="225" style="border-radius: 5px 5px 0px 0px" />
+                            <div class="card-body">
+                                <p class="cd_view_comment card-text">
+                                    This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit
+                                    longer.
+                                </p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button data-memNo="1" type="button" class="viewbtn btn btn-sm btn-outline-secondary viewmodal">보기</button>
+                                        <button data-memNo="1" type="button" class="editbtn btn btn-sm btn-outline-secondary modifymodal">수정</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card shadow-sm" style="height: 360px">
+                            <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
+                            xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
+                            preserveAspectRatio="xMidYMid slice" focusable="false">
+                            <title>Placeholder</title>
+                            <rect width="100%" height="100%" fill="#55595c"></rect>
+                            <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+                        </svg> -->
+                            <img class="cd_view_img" src="img/Ken.png" width="100%" height="225" style="border-radius: 5px 5px 0px 0px" />
+                            <div class="card-body">
+                                <p class="cd_view_comment card-text">
+                                    This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit
+                                    longer.
+                                </p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button data-memNo="2" type="button" class="viewbtn btn btn-sm btn-outline-secondary viewmodal">보기</button>
+                                        <button data-memNo="2" type="button" class="editbtn btn btn-sm btn-outline-secondary modifymodal">수정</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="none" id="behind_div" style="height: 600px; overflow: auto">
+            <button id="writeReview" type="button" class="btn btn-outline-dark" style="border: 0">
+                <strong class="dongle" style="font-size: 48px">후기 작성하기</strong>
+            </button>
+            <div id="postbox" class="none">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="bh_post_img" placeholder="이미지" />
+                    <label for="bh_post_img">이미지 주소</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="bh_post_title" placeholder="제목" />
+                    <label for="bh_post_title">제목</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="date" class="form-control" id="bh_post_date" placeholder="날짜" />
+                    <label for="bh_post_date">날짜</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="bh_post_comment" placeholder="내용" />
+                    <label for="bh_post_comment">내용</label>
+                </div>
+                <div>
+                    <button type="button" id="bh_post_btn" class="btn btn-primary" style="width: 100%">일지 작성하기</button>
+                </div>
+            </div>
+            <div id="behind_cards">
+                <div style="margin: 50px 0px 50px 0px"></div>
+                <!-- 카드 추가 
+            <div class="col-md-6" id="developblog">
+                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col-auto d-none d-lg-block">
+                        <img src = "${image}" width = "200" height = "250">
+                    </div>
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <h3 class="mb-0">${title}</h3>
+                        <div class="mb-1 text-body-secondary">${date}</div>
+                        <p class="card-text mb-auto">${comment}</p>
+                        <div>
+                            <button type="button" id = "modifyBehind" class="btn btn-primary ">수정하기</button>
+                            <button type="button" id = "deleteBehind" class="btn btn-secondary">삭제하기</button>
+                        </div>
+                    </div>
+                </div>
+            </div>   -->
+
+                <!-- <div class="col-md-6" id="developblog">
+                <div
+                    class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col-auto d-none d-lg-block">
+                        <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg"
+                            role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
+                            focusable="false">
+                            <title>Placeholder</title>
+                            <rect width="100%" height="100%" fill="#55595c"></rect>
+                            <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+                        </svg>
+                    </div>
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <h3 class="mb-0">제목</h3>
+                        <div class="mb-1 text-body-secondary">날짜</div>
+                        <p class="card-text mb-auto">내용.</p>
+                        <div>
+                            <button type="button" id="modifyBehind" class="btn btn-primary">수정하기</button>
+                            <button type="button" id="deleteBehind" class="btn btn-secondary">삭제하기</button>
+                        </div>
+                    </div>
+                </div>
+            </div>  -->
+            </div>
+        </div>
+        <script type="module" id="jjh_script">
+            // Firebase SDK 라이브러리 가져오기
+            import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
+            import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
+            import { collection, addDoc } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
+            import { getDocs, getDoc, doc, updateDoc, deleteDoc, setDoc } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
+
+            // Firebase 구성 정보 설정 / 프로젝트설정 > 구성
+            const firebaseConfig = {
+                // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
+                apiKey: 'AIzaSyAHVG8hDqtLmf0yJcUy3NX1RLYaCZLjMqw',
+                authDomain: 'sparta-ce0ab.firebaseapp.com',
+                projectId: 'sparta-ce0ab',
+                storageBucket: 'sparta-ce0ab.appspot.com',
+                messagingSenderId: '909906331233',
+                appId: '1:909906331233:web:a947163b5b79eceac98c20',
+                measurementId: 'G-E0DZ1PR5Q0',
+            };
+
+            // Firebase 인스턴스 초기화
+            const app = initializeApp(firebaseConfig);
+            const db = getFirestore(app);
+
+            //  메인 페이지 관련 ----------------------------------------------------------------------------------------------------
+
+            $('#mainbtn').click(async function () {
+                //openclose() 함수 내용 가져오기
+                // toggle() : 껐다켜기. 사실 div style="display : none" 으로 전환된것
+                $('#team_div').fadeOut();
+                $('#teammate_div').fadeOut();
+                $('#behind_div').fadeOut();
+
+                $('#empty_div').fadeIn();
+            });
+            $('#teambtn').click(async function () {
+                $('#empty_div').fadeOut();
+                $('#teammate_div').fadeOut();
+                $('#behind_div').fadeOut();
+
+                $('#team_div').fadeIn();
+            });
+            $('#teammatebtn').click(async function () {
+                $('#empty_div').fadeOut();
+                $('#team_div').fadeOut();
+                $('#behind_div').fadeOut();
+
+                $('#teammate_div').fadeIn();
+            });
+            $('#behindbtn').click(async function () {
+                $('#empty_div').fadeOut();
+                $('#team_div').fadeOut();
+                $('#teammate_div').fadeOut();
+
+                $('#behind_div').fadeIn();
+            });
+
+            // 팀원 소개 관련 -------------------------------------------------------------------------------------------------------
+
+            //페이지 로드 시 팀원 카드 불러오기
+            let docs = await getDocs(collection(db, 'Teammates'));
+            let t_docs = await getDocs(collection(db, 'Teammates'));
+            let t_row = t_docs.docs;
+            $('.cd_view_img').each(function (index) {
+                $(this).attr('src', t_row[index].data().img);
+            });
+            $('.cd_view_comment').each(function (index) {
+                $(this).text('[' + t_row[index].data().name + ']' + t_row[index].data().comment);
+            });
+
+            // 개별 팀원 정보 가져오기 GET 방식
+            async function getTeammateById(mateId) {
+                let docs = await getDocs(collection(db, 'Teammates'));
+
+                let row = docs.docs[mateId];
+
+                let mateData = {
+                    age: row.get('age'),
+                    blog: row.get('blog'),
+                    comment: row.get('comment'),
+                    costyle: row.get('costyle'),
+                    good: row.get('good'),
+                    img: row.get('img'),
+                    mbti: row.get('mbti'),
+                    name: row.get('name'),
+                    residence: row.get('residence'),
+                };
+
+                return mateData;
+            }
+
+            //모달 내부 값 업데이트
+            async function updateModal(mateData) {
+                // 각 속성 값
+                $('#md_view_age').text(mateData.age);
+                $('#md_view_blog').text(mateData.blog);
+                $('#md_view_blog').attr('href', mateData.blog);
+                $('#md_view_comment').text(mateData.comment);
+                $('#md_view_costyle').text(mateData.costyle);
+                $('#md_view_good').text(mateData.good);
+                $('#md_view_img').attr('src', mateData.img);
+                $('#md_view_mbti').text(mateData.mbti);
+                $('#md_view_name').text(mateData.name);
+                $('#md_view_residence').text(mateData.residence);
+                $('#mateView #md_view_mbti').text(mateData.mbti);
+            }
+
+            // 팀원소개 > 보기 버튼
+            // 클릭 시 모달 값 변경
+            $('.viewmodal').click(async function () {
+                // Query에서는 데이터 속성 이름을 camelCase로 변환하므로, data('memNo')로 호출할 때는 N이 소문자로 변환되어야
+                let btnId = $(this).data('memno');
+                let mateData = await getTeammateById(btnId);
+
+                await updateModal(mateData);
+
+                $('#mateView').addClass('d-block');
+            });
+
+            //모달 내부 form 값 기존값으로 채우기
+            async function updateForm(mateData) {
+                // 각 속성 값
+                $('#md_edit_age').val(mateData.age);
+                $('#md_edit_blog').val(mateData.blog);
+                $('#md_edit_comment').val(mateData.comment);
+                $('#md_edit_costyle').val(mateData.costyle);
+                $('#md_edit_good').val(mateData.good);
+                $('#md_edit_img').val(mateData.img);
+                $('#md_edit_mbti').val(mateData.mbti);
+                $('#md_edit_name').val(mateData.name);
+                $('#md_edit_residence').val(mateData.residence);
+            }
+
+            // 팀원소개 > 수정 버튼
+            // 클릭 시 선택한 수정 버튼의 data-memNo 모달에 전달 id = "md_edit_memNo"
+            $('.modifymodal').click(async function () {
+                // Query에서는 데이터 속성 이름을 camelCase로 변환하므로, data('memNo')로 호출할 때는 N이 소문자로 변환되어야
+                let memNo = $(this).data('memno');
+                let mateData = await getTeammateById(memNo);
+
+                // attr : 특정 속성값을 , ~ 로 변경
+                $('#md_edit_memNo').attr('data-memno', memNo);
+
+                await updateForm(mateData);
+
+                $('#mateModify').addClass('d-block');
+            });
+
+            async function updateTeammate(idx) {
+                // Teammates 컬렉션의 문서를 가져온다.
+                let docs = await getDocs(collection(db, 'Teammates'));
+                // mateIdx에 해당하는 문서를 찾는다.
+                let mateDoc = docs.docs[idx];
+                // 모달 내부 form id 가져오기
+                let updateData = {
+                    age: $('#md_edit_age').val(),
+                    blog: $('#md_edit_blog').val(),
+                    comment: $('#md_edit_comment').val(),
+                    costyle: $('#md_edit_costyle').val(),
+                    good: $('#md_edit_good').val(),
+                    img: $('#md_edit_img').val(),
+                    mbti: $('#md_edit_mbti').val(),
+                    name: $('#md_edit_name').val(),
+                    residence: $('#md_edit_residence').val(),
+                };
+
+                await updateDoc(mateDoc.ref, updateData);
+                // 업데이트 후 페이지 리로드
+                window.location.reload();
+
+                // 수정 끝났으면 관리자 선택 초기화
+                mateIdx = null;
+            }
+
+            //팀원소개 -> 수정 > SaveChanges 버튼 누르면 Firebase 값 업데이트
+            $('#modifyModalSave').click(async function () {
+                let idx = $('#md_edit_memNo').data('memno');
+                await updateTeammate(idx);
+                alert('수정이 완료되었습니다.');
+                $('#mateModify').addClass('d-block');
+            });
+
+            // 개발 후기 관련 ------------------------------------------------------------------------------------------------------
+
+            //페이지 로드 시 후기 카드 불러오기
+            let b_docs = await getDocs(collection(db, 'Behinds'));
+            let b_rows = b_docs.docs;
+            let bh_cards = b_rows.length;
+            if (b_rows.length > 0) {
+                b_rows.forEach((doc, i) => {
+                    let image = doc.data().img;
+                    let title = doc.data().title;
+                    let date = doc.data().date;
+                    let comment = doc.data().comment;
+                    console.log(i, title);
+                    //방명록 상자 색상 transparent -> white로 변경
+                    let temp_html = ` <div class="col-md-6" id="developblog">
+                                        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative ">
+                                            <div class="col-auto d-none d-lg-block">
+                                                <img src = "${image}" width = "200" height = "250">
+                                            </div>
+                                            <div class="col p-4 d-flex flex-column position-static whiteback" >
+                                                <h3 class="mb-0">${title}</h3>
+                                                <div class="mb-1 text-body-secondary">${date}</div>
+                                                <p class="card-text mb-auto">${comment}</p>
+                                                <div>
+                                                    <button type="button" data-cdid = ${doc.id} class="bh_edit_btn btn btn-primary ">수정하기</button>
+                                                    <button type="button" data-cdid = ${doc.id} class="bh_del_btn btn btn-secondary">삭제하기</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>`;
+                    $('#behind_cards').append(temp_html); //behind_txt 뒤에 붙여주세요
+                });
+            }
+
+            // 후기작성 버튼 클릭 시 파이어베이스에 데이터 업로드
+            $('#bh_post_btn').click(async function () {
+                const data = {
+                    img: $('#bh_post_img').val(),
+                    title: $('#bh_post_title').val(),
+                    date: $('#bh_post_date').val(),
+                    comment: $('#bh_post_comment').val(),
+                };
+
+                // 현재 시간을 문자형으로 저장
+                const currentTime = new Date();
+                const timestamp = currentTime.getTime();
+                let newId = timestamp.toString();
+
+                // 시간을 id 로 사용
+                const docRef = await setDoc(doc(collection(db, 'Behinds'), newId), data);
+
+                alert('일지가 작성되었습니다!');
+
+                // 업데이트 후 페이지 리로드
+                window.location.reload();
+            });
+
+            // 개발 후기 > 수정하기 버튼
+            $('.bh_edit_btn').click(async function () {
+                // 수정하기 버튼에 들어있던 문서아이디 = data-cdid 값을 모달에 추가 attr()
+                $('#behindModify').attr('data-cdid', $(this).data('cdid'));
+                $('#behindModify').addClass('d-block');
+            });
+
+            $('.bh_edit_save').click(async function () {
+                // 모달 안에 있던 data-cdid 값을 가져와서 문자화
+                let doc_id = $('#behindModify').data('cdid').toString();
+
+                const data = {
+                    img: $('#bh_edit_img').val(),
+                    title: $('#bh_edit_title').val(),
+                    date: $('#bh_edit_date').val(),
+                    comment: $('#bh_edit_comment').val(),
+                };
+
+                const docRef = await setDoc(doc(collection(db, 'Behinds'), doc_id), data);
+
+                alert('일지가 작성되었습니다!');
+
+                // 업데이트 후 페이지 리로드
+                window.location.reload();
+            });
+
+            // 지우려는 카드 인덱스 받아서 파이어베이스의 해당하는 문서 지우기. ref 통해.
+            async function delBehindCard(doc_id) {
+                await deleteDoc(doc(db, 'Behinds', doc_id.toString()));
+                alert('삭제되었습니다.');
+
+                // 업데이트 후 페이지 리로드
+                window.location.reload();
+            }
+
+            $('.bh_del_btn').click(async function () {
+                // 삭제 여부 확인을 위한 알림
+                const confirmed = confirm('정말로 삭제하시겠습니까?');
+
+                if (confirmed) {
+                    let doc_id = $(this).data('cdid');
+                    await delBehindCard(doc_id);
+                }
+            });
+        </script>
+        <script id="ljw_script"></script>
+        <script id="ljw_script"></script>
+        <script id="ojy_script">
+            $('.btn-close').on('click', function () {
+                $('#mateView').removeClass('d-block');
+            });
+
+            $('.btn-close,#modifyModalClose').on('click', function () {
+                $('#mateModify').removeClass('d-block');
+            });
+            //개발 후기 -> 수정하기 클릭 시 나오는 modal창 키고 끄기
+            $('#modifyBehind').on('click', function () {
+                $('#behindModify').addClass('d-block');
+            });
+            $('.btn-close').on('click', function () {
+                $('#behindModify').removeClass('d-block');
+            });
+            // 버튼을 1번 클릭하면 숨겨진 포스팅박스가 나오고 , 다시 클릭하면 숨겨짐
+            $('#writeReview').on('click', function () {
+                $('#postbox').toggleClass('none');
+            });
+        </script>
+    </body>
+</html>
