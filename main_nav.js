@@ -8,11 +8,11 @@ $(document).ready(function(){
         if (Cscroll >= $('#TEAM').offset().top - 200) {
             $('nav li:nth-child(2)').addClass('show').siblings().removeClass('show')
         } 
-        if (Cscroll >= $('#MEMBER').offset().top) {
+        if (Cscroll >= $('#MEMBER').offset().top - 200) {
             $('nav li:nth-child(3)').addClass('show').siblings().removeClass('show')
         }
     
-        if (Cscroll >= $('#BOARD').offset().top) {
+        if (Cscroll >= $('#BOARD').offset().top - 200) {
             $('nav li:nth-child(4)').addClass('show').siblings().removeClass('show')
         }
     
