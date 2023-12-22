@@ -140,7 +140,12 @@ header{
 .main_nav{
     background-color: rgba(255, 255, 255, 0.5);
     width: 90%;
-    border-radius: 200px;  font-family: 'SCoreDream4';  
+    border-radius: 200px;  font-family: 'SCoreDream4'; 
+    top: 0;
+    /* left: 50%;
+    transform: translateX(-50%); */
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(5px); 
 }
 .sun{
     position: absolute;
@@ -157,10 +162,16 @@ header{
 .main_nav ul li{
     /* background-color: red; */
     margin:0 60px;
+    color:#345E3D
+}
+.main_nav ul li.show{
+    color:inherit;
+    font-family: 'SCoreDream6';
 }
 
 
 section{
     height: 100vh;
+    background-color: #7FAD6F;
 }
 
