@@ -7,9 +7,9 @@ $(window).scroll(function () {
 
     if (Cscroll >= $('#TEAM').offset().top - 200) {
         $('nav li:nth-child(2)').addClass('show').siblings().removeClass('show')
-        $('#Design').addClass('active')
+     
     } else {
-        $('#Design').removeClass('active')
+       
     }
 
     if (Cscroll >= $('#MEMBER').offset().top) {
