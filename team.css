@@ -1,0 +1,51 @@
+h1 {
+    font-size: 72px;
+    display: inline-flex;
+    margin: 2px;
+}
+
+h3 {
+    margin-bottom: 3px;
+}
+
+h5 {
+    margin: 2px;
+}
+
+#h {
+    font-size: 36px;
+    justify-content: center;
+    align-items: flex-end;
+    display: flex;
+}
+
+#line {
+    display: inline-flex;
+    margin: 20px;
+    border-left: solid thin #6f6f6f;
+    height: 100px;
+}
+
+#grid_vt {
+    display: grid;
+    grid-template-rows: 150px;
+}
+
+@media screen and (max-width: 550px) {
+    h1 {
+        font-size: 32px;
+    }
+    #h {
+        font-size: 18px;
+    }
+}
+#grid_hz {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.img {
+    display: inline-flex;
+    width: 350px;
+    height: 400px;
+}
