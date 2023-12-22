@@ -150,6 +150,9 @@ header{
 .sun{
     position: absolute;
 }
+.sun img{
+    position: absolute;
+}
 .main_nav ul{
     display: flex;
     flex-direction: row;
@@ -179,4 +182,5 @@ section#HOME{
     background-position: center;
     background-size: cover;
 }
+
 
