@@ -148,10 +148,22 @@ header{
     backdrop-filter: blur(5px); 
 }
 .sun{
+    width: 90px;
+    height: 90px;
     position: absolute;
+    top:50%;
+    left:-10px;
+    transform: translate(0,-50%);
 }
 .sun img{
     position: absolute;
+}
+.sun img.sun02{
+    animation: sun02 15s infinite alternate ease-in;
+}
+@keyframes sun02{
+    0%{transform: rotate(0deg);}
+    100%{transform: rotate(365deg);}
 }
 .main_nav ul{
     display: flex;
