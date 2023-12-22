@@ -145,7 +145,8 @@ header {
     top: 40px;
     width: 100%;
     height: 65px;
-
+    z-index: 10000;
+    
 }
 
 .main_nav {
@@ -278,4 +279,62 @@ section#HOME {
 .home_member_img img:hover+span {
     opacity: 0.8;
 
+}
+.sprout{
+    position: absolute;
+    width: 100%;
+    height: 200px;
+    bottom: 0px;    
+}
+.sprout img:nth-child(1){
+    animation: sprout 0.9s infinite alternate;
+    position: absolute;
+    top:60%;
+    left:1%;
+}
+.sprout img:nth-child(2){
+    animation: sprout 0.8s infinite alternate;
+    position: absolute;
+    top:80%;
+    left:14%;
+}
+.sprout img:nth-child(3){
+    animation: sprout 1s infinite alternate;
+    position: absolute;
+    top:70%;
+    left:28%;
+}
+.sprout img:nth-child(4){
+    animation: sprout 0.7s infinite alternate;
+    position: absolute;
+    top:80%;
+    left:48%;
+}
+.sprout img:nth-child(5){
+    animation: sprout 0.5s infinite alternate;
+    position: absolute;
+    top:75%;
+    left:67%;
+}
+.sprout img:nth-child(5){
+    animation: sprout 1s infinite alternate;
+    position: absolute;
+    top:80%;
+    left:73%;
+}
+.sprout img:nth-child(6){
+    animation: sprout 1s infinite alternate;
+    position: absolute;
+    top:60%;
+    left:85%;
+}
+.sprout img:nth-child(7){
+    animation: sprout 1s infinite alternate;
+    position: absolute;
+    top:65%;
+    left:96%;
+}
+@keyframes sprout{
+    0%{transform: translateY(-30%);}
+    100%{transform: translateY(0);}
 }
