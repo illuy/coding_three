@@ -116,3 +116,51 @@ textarea {
     font-family: inherit;
     vertical-align: middle
 }
+
+/* section01 */
+
+html{
+    scroll-behavior: smooth;
+}
+
+main{
+    background-color: #7ACBFA;
+}
+header{
+    display: flex;
+    flex-direction: row;
+    /* 생략가능 / display: flex; 기본값 */
+    justify-content: center;
+
+    position: fixed;
+    top:40px;
+    width: 100%;
+    height: 65px;
+}
+.main_nav{
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 90%;
+    border-radius: 200px;    
+}
+.sun{
+    position: absolute;
+}
+.main_nav ul{
+    display: flex;
+    flex-direction: row;
+    /* 생략가능 / display: flex; 기본값 */
+    justify-content: center;
+    align-items: center;
+    height: 100%; 
+    
+}
+.main_nav ul li{
+    /* background-color: red; */
+    margin:0 60px;
+}
+
+
+section{
+    height: 100vh;
+}
+
