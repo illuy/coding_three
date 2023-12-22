@@ -193,6 +193,18 @@ section#HOME{
     background-image: url(./image/intro_bg.jpg);
     background-position: center;
     background-size: cover;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
 }
 
-
+#HOME h2{text-transform: uppercase;font-family: 'SCoreDream8';font-size: 86px;}
+#HOME h5{font-size: 26px;}
+.home_member_img{
+    margin:100px 0;
+}
+.home_member_img img{
+    margin:0 20px;
+}
