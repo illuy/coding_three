@@ -10,6 +10,11 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
+    <script type="module">
+        //삭제 버튼 눌렀을 때
+
+    </script>
+
     <style>
         .write {
             background-color: aqua;
@@ -109,7 +114,6 @@
 
 <body>
     <!--방명록 글쓰기 폼-->
-
     <div class="write">
         <div class="wForm1">
             <div class="wIconPview">
@@ -214,37 +218,56 @@
         changeIcon();
         changeimg.onchange = changeIcon;
 
+
+
+
+        // 질문 1
+        // 이자리에  async function deletePost(doc_id)  함수 선언 미리해두었는데도
+        // 아래 onClick="deletePost()" 할 때 not defined 나오더라
+        // 왜그런거임? 선언 먼저 햇는데?
+
+        // 해결방법 
+        // 버튼의 onclick 은 빼고
+        // 스크립트에서 버튼 눌렀을 때  $('#btn_delete').click() 으로 바꾸니 되더라.
+
+        // 질문2
+        // 그럼 어쩌란거임;
+        // 그럼 module 을 아예 안쓰고 해야되냐
+        // 근데 module 쓰면 onclick 이 작동을 안하잖아
+
+
         //페이지 로드 시 방명록 포스트들 불러오기
         let readDocs = await getDocs(collection(db, 'coding-three'));
-        readDocs.forEach((doc) => {
+        readDocs.forEach((doc) => {  //문서 하나씩 doc 이라고 부름
 
-            let row = doc.data();
+            let row = doc.data();   // .data() 를 해야 우리가 값을 읽을 수 있음.
 
+            // <- 저장
             let wName = row['이름'];
-            let wPassword = row['비밀번호'];
+            //let wPassword = row['비밀번호'];
             let wComment = row['내용'];
             let wDate = row['작성일'];
             let wIcon = row['아이콘'];
 
             let temp_html = `
-        <div class="posts col-md-6" id="posts">
-            <div class="pIcon">
-                <img src="${wIcon}" width="80" style="border:2px solid #000000;">
-            </div>
-            <div class="pContent">
-                <div class="pName" id="pName">
-                    <h4>${wName}</h4>
-                </div>
-                <div class="pComment" id="pComment">
-                    <p>${wComment}</p>
-                    <div class="pControl">
-                        <p><span style="color:grey">${wDate}</span></p>
-                        <button type="button" id="btn_edit" data-cdid=${doc.id} class="bh_edit_btn btn btn-primary ">수정하기</button>
-                        <button type="button" id="btn_delete" data-cdid=${doc.id} class="bh_del_btn btn btn-secondary" onclick="deletePost('${doc.id}')">삭제하기</button>
+                <div class="posts col-md-6" id="posts">
+                    <div class="pIcon">
+                        <img src="${wIcon}" width="80" style="border:2px solid #000000;">
                     </div>
-                </div>
-            </div>
-        </div>`;
+                    <div class="pContent">
+                        <div class="pName" id="pName">
+                            <h4>${row['이름']}</h4>
+                        </div>
+                        <div class="pComment" id="pComment">
+                            <p>${wComment}</p>
+                            <div class="pControl">
+                                <p><span style="color:grey">${wDate}</span></p>
+                                <button type="button" id="btn_edit" data-id=${doc.id} class="bh_edit_btn btn btn-primary btn_edit ">수정하기</button>
+                                <button type="button" id="btn_delete" data-id=${doc.id} class="bh_del_btn btn btn-secondary btn_delete " >삭제하기</button> 
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
             $('#postsGroup').prepend(temp_html);
         });
 
@@ -282,40 +305,42 @@
             window.location.reload();
         })
 
+        // 이거 함수 위에  그냥 아래로 빼고 버튼 눌렀을 때 도 스크립트로 내려서 버튼엔 onclick 없앴음
 
-        //삭제 버튼 눌렀을 때
-        async function deletePost(doc_id, data) {
+        // 삭제 버튼
+        async function deletePost(doc_id) {
+
+            let targetDoc = await getDoc(doc(db, "coding-three", doc_id));
+
+            // 가져온 문서를 데이터로 변환
+            let row = targetDoc.data()
+
+            // 그 안에 있는 .pst_pw 가져오기
+            let wPassword = row.비밀번호;
+
             const really = prompt("작성 시 입력한 비밀번호를 입력하세요." + "");
-            if (really === 'codingthree' || really == data.wPassword) {
+            console.log(really)
+
+            if (really === 'codingthree' || really == wPassword) {
                 try {
-                    await deleteDoc(doc(collection(db, 'coding-three', doc_id)));
+                    await deleteDoc(doc(db, 'coding-three', doc_id));
                     alert('삭제되었습니다.');
                     window.location.reload();
                 } catch (error) {
                     console.error('삭제 중 오류 발생:', error);
                     alert('삭제 중 오류가 발생했습니다.');
                 }
+            } else if (really == null) {
             } else {
                 alert('비밀번호가 일치하지 않습니다.');
             }
         }
 
-        // $('#btn_delete').click(async function () {
+        $('.btn_delete').click(async function () {
+            let doc_id = $(this).data("id");
+            deletePost(doc_id)
+        });
 
-        //     let dataId = $(this).data("id");
-        //     let id_doc = await getDoc(doc(db, "coding-three", dataId));
-        //     let row = id_doc.data();
-        //     let wPassword = row.wPassword;
-
-        //     const really = prompt("작성 시 입력한 비밀번호를 입력하세요." + "");
-        //     if (really === 'codingthree' || really == wPassword) {
-        //         deleteDoc(doc(db, "coding-three", dataId)).then(() => {
-        //             window.location.reload();
-        //         });
-        //     } else {
-        //         alert('비밀번호가 일치하지 않습니다.');
-        //     }
-        // });
     </script>
 </body>
 
