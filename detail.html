@@ -8,13 +8,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
-            $(".tab_title li").click(function () {
-                var idx = $(this).index();
-                $(".tab_title li").removeClass("on");
-                $(".tab_title li").eq(idx).addClass("on");
-                $(".tab_cont > div").hide();
-                $(".tab_cont > div").eq(idx).show();
-            })
+            $(".tab-cont > div:not(:first)").hide();
+            $(".tab_btn li").click(function () {
+                $(".tab_btn li").removeClass("active");
+                $(this).addClass("active");
+
+                var activeTab = $(this).attr("data-target");
+                $(".tab-cont > div").hide();
+                $("#" + activeTab).show();
+            });
         });
     </script>
     <style>
@@ -29,12 +31,16 @@
             padding: 50px 0 0 0;
         }
 
-        .tab_title li {
+        .tab_btn li {
             list-style: none;
             cursor: pointer;
         }
 
-        .tab_cont div.on {
+        .tab-cont > div {
+            display: none;
+        }
+
+        .tab-cont > div.active {
             display: block;
         }
 
@@ -49,10 +55,11 @@
     </style>
 </head>
 
+
 <body>
     <div class="container">
-        <div class="tab_cont">
-            <div class="on">
+        <div class="tab-cont">
+            <div id="tab1" class="active">
                 <div class="grd_hz">
                     <div style="margin: 50px 0 0 35px;">
                         <img src="https://health.chosun.com/site/data/img_dir/2023/07/17/2023071701753_0.jpg"
@@ -83,7 +90,7 @@
                     </div>
                 </div>
             </div>
-            <div class="grd_hz">
+            <div id="tab2" class="grd_hz">
                 <div style="margin: 50px 0 0 35px;">
                     <img src="https://health.chosun.com/site/data/img_dir/2023/07/17/2023071701753_0.jpg"
                         style="margin-right: 50px;">
@@ -112,7 +119,7 @@
                     </ol>
                 </div>
             </div>
-            <div class="grd_hz">
+            <div id="tab3" class="grd_hz">
                 <div style="margin: 50px 0 0 35px;">
                     <img src="https://health.chosun.com/site/data/img_dir/2023/07/17/2023071701753_0.jpg"
                         style="margin-right: 50px;">
@@ -141,7 +148,7 @@
                     </ol>
                 </div>
             </div>
-            <div class="grd_hz">
+            <div id="tab4" class="grd_hz">
                 <div style="margin: 50px 0 0 35px;">
                     <img src="https://health.chosun.com/site/data/img_dir/2023/07/17/2023071701753_0.jpg"
                         style="margin-right: 50px;">
@@ -170,7 +177,7 @@
                     </ol>
                 </div>
             </div>
-            <div class="grd_hz">
+            <div id="tab5" class="grd_hz">
                 <div style="margin: 50px 0 0 35px;">
                     <img src="https://health.chosun.com/site/data/img_dir/2023/07/17/2023071701753_0.jpg"
                         style="margin-right: 50px;">
@@ -199,7 +206,7 @@
                     </ol>
                 </div>
             </div>
-            <div class="grd_hz">
+            <div id="tab6" class="grd_hz">
                 <div style="margin: 50px 0 0 35px;">
                     <img src="https://health.chosun.com/site/data/img_dir/2023/07/17/2023071701753_0.jpg"
                         style="margin-right: 50px;">
@@ -230,19 +237,19 @@
             </div>
         </div>
         <div>
-            <ul class="tab_title">
-                <li class="on"><img
+            <ul class="tab_btn">
+                <li class="active" data-target="tab1"><img
                         src="https://w7.pngwing.com/pngs/384/868/png-transparent-person-profile-avatar-user-basic-ui-icon.png"
                         width="50px" style="padding-top : 30px;"></li>
-                <li><img src="https://w7.pngwing.com/pngs/384/868/png-transparent-person-profile-avatar-user-basic-ui-icon.png"
+                <li data-target="tab2"><img src="https://w7.pngwing.com/pngs/384/868/png-transparent-person-profile-avatar-user-basic-ui-icon.png"
                         width="50px" style="padding-top : 30px;"></li>
-                <li><img src="https://w7.pngwing.com/pngs/384/868/png-transparent-person-profile-avatar-user-basic-ui-icon.png"
+                <li data-target="tab3"><img src="https://w7.pngwing.com/pngs/384/868/png-transparent-person-profile-avatar-user-basic-ui-icon.png"
                         width="50px" style="padding-top : 30px;"></li>
-                <li><img src="https://w7.pngwing.com/pngs/384/868/png-transparent-person-profile-avatar-user-basic-ui-icon.png"
+                <li data-target="tab4"><img src="https://w7.pngwing.com/pngs/384/868/png-transparent-person-profile-avatar-user-basic-ui-icon.png"
                         width="50px" style="padding-top : 30px;"></li>
-                <li><img src="https://w7.pngwing.com/pngs/384/868/png-transparent-person-profile-avatar-user-basic-ui-icon.png"
+                <li data-target="tab5"><img src="https://w7.pngwing.com/pngs/384/868/png-transparent-person-profile-avatar-user-basic-ui-icon.png"
                         width="50px" style="padding-top : 30px;"></li>
-                <li><img src="https://w7.pngwing.com/pngs/384/868/png-transparent-person-profile-avatar-user-basic-ui-icon.png"
+                <li data-target="tab6"><img src="https://w7.pngwing.com/pngs/384/868/png-transparent-person-profile-avatar-user-basic-ui-icon.png"
                         width="50px" style="padding-top : 30px;"></li>
             </ul>
         </div>
