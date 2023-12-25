@@ -7,7 +7,10 @@ $(document).ready(function(){
         }
         if (Cscroll >= $('#TEAM').offset().top - 200) {
             $('nav li:nth-child(2)').addClass('show').siblings().removeClass('show')
-        } 
+            $('#TEAM').addClass('active')
+        } else {
+            $('#TEAM').removeClass('active')
+        }
         if (Cscroll >= $('#MEMBER').offset().top - 200) {
             $('nav li:nth-child(3)').addClass('show').siblings().removeClass('show')
         }
@@ -28,6 +31,23 @@ $(document).ready(function(){
             // $(".tab_cont > div").hide();
             $(".tab_cont > div").eq(idx).css({'display': 'flex'}).siblings().hide();
         })
+
+
+        $(".tab-cont > div:not(:first)").hide();
+        $(".tab_btn li").click(function () {
+            $(".tab_btn li").removeClass("active");
+            $(this).addClass("active");
+
+            var activeTab = $(this).attr("data-target");
+            $(".tab-cont > div").hide();
+            $("#" + activeTab).show();
+        });
+
+        $(".wForm2 input,textarea").click(function(){
+            $(this).siblings('label').addClass("active")
+        })
+
+
     });
 })
 

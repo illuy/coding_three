@@ -2,7 +2,7 @@
 
 #BOARD{
     height: auto;
-    padding-top:150px;
+    padding-top:110px;
     display: flex;
     flex-direction: column;
     
@@ -10,7 +10,7 @@
 }
 .write {
     /* background-color: aqua; */
-    /* border: 2px solid #000000; */
+    border: 2px solid #000000;
     border-radius: 10px;
     display: flex;
     flex-direction: row;
@@ -20,7 +20,7 @@
 }
 
 .wForm1 {
-    background-color: green;
+    /* background-color: green; */
     width: 25%;
     display: flex;
     flex-direction: column;
@@ -29,9 +29,9 @@
 }
 
 .wForm2 {
-    background-color: blue;
+    /* background-color: blue; */
     width: 75%;
-    padding: 20px;
+    /* padding: 20px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -51,16 +51,17 @@
 }
 
 .wBtn {
-    background-color: blueviolet;
+    /* background-color: blueviolet; */
     padding: 10px;
     text-align: center;
+    position: relative;
 }
 
-.wBtn>button {
+/* .wBtn>button {
     width: 100px;
     margin-left: 20px;
     margin-right: 20px;
-}
+} */
 
 .posts {
     display: flex;
@@ -100,4 +101,72 @@
 
 .pControl {
     text-align: right;
+}
+
+/* ------------------------------------------------------- */
+.form-log{
+display: flex;
+border:1px solid red;
+height: 40px;
+
+}
+.form-log > div:nth-child(1){
+    margin-right:20px;
+    margin-bottom:20px;
+}
+.wForm2 label{
+    display: block;
+    position: absolute;
+
+}
+.wForm2 label.active{
+    transform: translate(0,-20px);
+    font-size: 0.8em;
+}
+.wForm2 input{
+    outline: none;
+    background-color: transparent;
+    
+    
+}
+.wForm2 input:focus{
+
+}
+
+textarea{
+    width: 381px;
+    height: 109px;
+}
+
+
+/* ------------------------------------------- */
+/* 등록 리셋 버튼 꾸미기 */
+.button {
+    cursor: pointer;
+    padding: 5px 40px;
+    text-align: center;
+    color: #fff;
+    border: 2px solid #345E3D;
+    font-size: 18px;
+    border-radius: 0.3em;
+    transition: all 0.2s ease-in-out;
+    position: relative;
+    overflow: hidden;
+    background-color: #345E3D;
+}
+.button:before {
+    content: "";
+    background-color: rgba(255, 255, 255, 0.5);
+    height: 100%;
+    width: 3em;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: -4.5em;
+    transform: skewX(-45deg) translateX(0);
+    transition: none;
+}
+.button:hover:before {
+    transform: skewX(-45deg) translateX(13.5em);
+    transition: all 0.5s ease-in-out;
 }

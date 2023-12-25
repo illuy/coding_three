@@ -10,20 +10,20 @@
     
 
 }
-h1 {
+#TEAM h1 {
     display: inline-flex;
     font-family: 'SCoreDream8';
     font-size: 76px;
     position: relative;
 }
 
-h3 {
+#TEAM h3 {
     margin-bottom: 10px;
     font-size: 26px;
     font-family: 'SCoreDream5';
 }
 
-h5 {
+#TEAM h5 {
     margin-top: -10px;
     font-size: 22px;
 }
@@ -48,6 +48,9 @@ h5 {
 #grid_vt {
     display: grid;
     grid-template-rows: 150px;
+     transform: translateX(-500px);
+     opacity: 0;
+     transition: 0.5s 0.2s;
 }
 
 @media screen and (max-width: 550px) {
@@ -88,9 +91,33 @@ h5 {
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
+    transform: translateX(500px);
+    opacity: 0;
+    transition: 0.5s 0.4s;
     
     
 }
 .team_tree img{
     width: 100%;
+}
+
+
+
+#TEAM .title{
+    transform: translateX(-500px);
+    opacity: 0;
+    transition: 0.5s;
+}
+
+#TEAM.active .title{
+    transform: translateX(0);
+    opacity: 1;
+}
+.active #grid_vt{
+    transform: translateX(0);
+    opacity: 1;
+}
+.active .team_tree{
+    transform: translateX(0);
+    opacity: 1;
 }
