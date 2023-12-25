@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>coding_three</title>
-    <link rel="stylesheet" href="common.css">
-    <link rel="stylesheet" href="team.css">
-    <link rel="stylesheet" href="member.css">
-    <link rel="stylesheet" href="board.css">
+    <link rel="stylesheet" href="./common.css">
+    <link rel="stylesheet" href="./team.css">
+    <link rel="stylesheet" href="./member.css">
+    <link rel="stylesheet" href="./board.css">
 </head>
 
 <body>
@@ -313,7 +313,7 @@
                         <button type="button" id="btn_post" class="btn btn-primary">등록</button>
                         <button type="button" id="btn_reset" class="btn btn-primary" onclick="resetForm()">리셋</button>
                     </div>
-        
+
                     <!--리셋 버튼 스크립트-->
                     <script>
                         function resetForm() {
@@ -323,10 +323,10 @@
                             }
                         }
                     </script>
-        
+
                 </div>
             </div>
-        
+
             <!--게시글 표시 영역-->
             <!-- <div class="posts" class="col-md-6" id="posts">
                     <div class="pIcon">
@@ -395,7 +395,7 @@
         // 아래 onClick="deletePost()" 할 때 not defined 나오더라
         // 왜그런거임? 선언 먼저 햇는데?
 
-        // 해결방법 
+        // 해결방법
         // 버튼의 onclick 은 빼고
         // 스크립트에서 버튼 눌렀을 때  $('#btn_delete').click() 으로 바꾸니 되더라.
 
@@ -432,7 +432,7 @@
                             <div class="pControl">
                                 <p><span style="color:grey">${wDate}</span></p>
                                 <button type="button" id="btn_edit" data-id=${doc.id} class="bh_edit_btn btn btn-primary btn_edit ">수정하기</button>
-                                <button type="button" id="btn_delete" data-id=${doc.id} class="bh_del_btn btn btn-secondary btn_delete " >삭제하기</button> 
+                                <button type="button" id="btn_delete" data-id=${doc.id} class="bh_del_btn btn btn-secondary btn_delete " >삭제하기</button>
                             </div>
                         </div>
                     </div>
