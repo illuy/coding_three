@@ -9,6 +9,165 @@
     <link rel="stylesheet" href="./team.css">
     <link rel="stylesheet" href="./member.css">
     <link rel="stylesheet" href="./board.css">
+
+    <script type="module">
+        //Firebase SDK 라이브러리 가져오기
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
+        import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
+        import { collection, addDoc, getDocs, getDoc, doc, updateDoc, deleteDoc, setDoc } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDsHUgRONE099dI_cbgXTzunmAg3XGMP2k",
+            authDomain: "coding-three.firebaseapp.com",
+            projectId: "coding-three",
+            storageBucket: "coding-three.appspot.com",
+            messagingSenderId: "597951423527",
+            appId: "1:597951423527:web:286f4c263055374ba81a02"
+        }
+
+        // Firebase 인스턴스 초기화
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+
+        //아이콘 드롭다운
+        let changeimg = document.getElementById("changeIcon");
+        let myImg = document.getElementById("myIcon");
+
+        function changeIcon() {
+            let index = changeimg.selectedIndex;
+            myImg.src = changeimg.options[index].value;
+        }
+
+        changeIcon();
+        changeimg.onchange = changeIcon;
+
+
+
+
+        // 질문 1
+        // 이자리에  async function deletePost(doc_id)  함수 선언 미리해두었는데도
+        // 아래 onClick="deletePost()" 할 때 not defined 나오더라
+        // 왜그런거임? 선언 먼저 햇는데?
+
+        // 해결방법
+        // 버튼의 onclick 은 빼고
+        // 스크립트에서 버튼 눌렀을 때  $('#btn_delete').click() 으로 바꾸니 되더라.
+
+        // 질문2
+        // 그럼 어쩌란거임;
+        // 그럼 module 을 아예 안쓰고 해야되냐
+        // 근데 module 쓰면 onclick 이 작동을 안하잖아
+
+
+        //페이지 로드 시 방명록 포스트들 불러오기
+        let readDocs = await getDocs(collection(db, 'coding-three'));
+        readDocs.forEach((doc) => {  //문서 하나씩 doc 이라고 부름
+
+            let row = doc.data();   // .data() 를 해야 우리가 값을 읽을 수 있음.
+
+            // <- 저장
+            let wName = row['이름'];
+            //let wPassword = row['비밀번호'];
+            let wComment = row['내용'];
+            let wDate = row['작성일'];
+            let wIcon = row['아이콘'];
+
+            let temp_html = `
+            <div class="posts col-md-6" id="posts">
+                <div class="pIcon">
+                    <img src="${wIcon}" width="80" style="border:2px solid #000000;">
+                    </div>
+                    <div class="pContent">
+                        <div class="pName" id="pName">
+                            <h4>${row['이름']}</h4>
+                            </div>
+                            <div class="pComment" id="pComment">
+                                <p>${wComment}</p>
+                                <div class="pControl">
+                                    <p><span style="color:grey">${wDate}</span></p>
+                                    <button type="button" id="btn_edit" data-id=${doc.id} class="bh_edit_btn btn btn-primary btn_edit ">수정하기</button>
+                                    <button type="button" id="btn_delete" data-id=${doc.id} class="bh_del_btn btn btn-secondary btn_delete " >삭제하기</button>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </div>`;
+                                    $('#postsGroup').prepend(temp_html);
+                                });
+
+
+                                //등록 버튼 클릭 시 파이어베이스에 아래의 데이터를 업로드
+                                $('#btn_post').click(async function () {
+                                    const data = {
+                                        wName: $('#wName').val(),
+                                        wPassword: $('#wPassword').val(),
+                                        wComment: $('#wComment').val(),
+                                        wIcon: $('#changeIcon option:selected').val(),
+                                    };
+
+                                    if (!data.wName || !data.wPassword || !data.wComment) {
+                                        alert('이름, 비밀번호, 내용을 모두 입력해주세요.');
+                                        return;
+                                    }
+
+                                    console.log(data.wName)
+                                    let date = new Date();
+                                    let wDate = date.getFullYear().toString() + ". " + (date.getMonth() + 1).toString().padStart(2, '0') + ". " + date.getDate().toString().padStart(2, '0');
+                                    let docId = date.toString().split(' ').join('');
+
+                                    let my_doc = {
+                                        '이름': data.wName,
+                                        '비밀번호': data.wPassword,
+                                        '내용': data.wComment,
+                                        '작성일': wDate,
+                                        '아이콘': data.wIcon,
+                                    };
+
+                                    await setDoc(doc(db, "coding-three", docId), my_doc);
+                                    alert('게시글이 등록되었습니다.');
+
+                                    window.location.reload();
+                                })
+
+                                // 이거 함수 위에  그냥 아래로 빼고 버튼 눌렀을 때 도 스크립트로 내려서 버튼엔 onclick 없앴음
+
+                                // 삭제 버튼
+                                async function deletePost(doc_id) {
+
+                                    let targetDoc = await getDoc(doc(db, "coding-three", doc_id));
+
+                                    // 가져온 문서를 데이터로 변환
+                                    let row = targetDoc.data()
+
+                                    // 그 안에 있는 .pst_pw 가져오기
+                                    let wPassword = row.비밀번호;
+
+                                    const really = prompt("작성 시 입력한 비밀번호를 입력하세요." + "");
+                                    console.log(really)
+
+                                    if (really === 'codingthree' || really == wPassword) {
+                                        try {
+                                            await deleteDoc(doc(db, 'coding-three', doc_id));
+                                            alert('삭제되었습니다.');
+                                            window.location.reload();
+                                        } catch (error) {
+                                            console.error('삭제 중 오류 발생:', error);
+                                            alert('삭제 중 오류가 발생했습니다.');
+                                        }
+                                    } else if (really == null) {
+                                    } else {
+                                        alert('비밀번호가 일치하지 않습니다.');
+                                    }
+                                }
+
+                                $('.btn_delete').click(async function () {
+                                    let doc_id = $(this).data("id");
+                                    deletePost(doc_id)
+                                });
+
+                                </script>
+
+
 </head>
 
 <body>
@@ -346,162 +505,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="main_nav.js"></script>
 
-    <script type="module">
-        //Firebase SDK 라이브러리 가져오기
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
-        import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
-        import { collection, addDoc, getDocs, getDoc, doc, updateDoc, deleteDoc, setDoc } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyDsHUgRONE099dI_cbgXTzunmAg3XGMP2k",
-            authDomain: "coding-three.firebaseapp.com",
-            projectId: "coding-three",
-            storageBucket: "coding-three.appspot.com",
-            messagingSenderId: "597951423527",
-            appId: "1:597951423527:web:286f4c263055374ba81a02"
-        }
-
-        // Firebase 인스턴스 초기화
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-
-        //아이콘 드롭다운
-        let changeimg = document.getElementById("changeIcon");
-        let myImg = document.getElementById("myIcon");
-
-        function changeIcon() {
-            let index = changeimg.selectedIndex;
-            myImg.src = changeimg.options[index].value;
-        }
-
-        changeIcon();
-        changeimg.onchange = changeIcon;
-
-
-
-
-        // 질문 1
-        // 이자리에  async function deletePost(doc_id)  함수 선언 미리해두었는데도
-        // 아래 onClick="deletePost()" 할 때 not defined 나오더라
-        // 왜그런거임? 선언 먼저 햇는데?
-
-        // 해결방법
-        // 버튼의 onclick 은 빼고
-        // 스크립트에서 버튼 눌렀을 때  $('#btn_delete').click() 으로 바꾸니 되더라.
-
-        // 질문2
-        // 그럼 어쩌란거임;
-        // 그럼 module 을 아예 안쓰고 해야되냐
-        // 근데 module 쓰면 onclick 이 작동을 안하잖아
-
-
-        //페이지 로드 시 방명록 포스트들 불러오기
-        let readDocs = await getDocs(collection(db, 'coding-three'));
-        readDocs.forEach((doc) => {  //문서 하나씩 doc 이라고 부름
-
-            let row = doc.data();   // .data() 를 해야 우리가 값을 읽을 수 있음.
-
-            // <- 저장
-            let wName = row['이름'];
-            //let wPassword = row['비밀번호'];
-            let wComment = row['내용'];
-            let wDate = row['작성일'];
-            let wIcon = row['아이콘'];
-
-            let temp_html = `
-            <div class="posts col-md-6" id="posts">
-                <div class="pIcon">
-                    <img src="${wIcon}" width="80" style="border:2px solid #000000;">
-                    </div>
-                    <div class="pContent">
-                        <div class="pName" id="pName">
-                            <h4>${row['이름']}</h4>
-                            </div>
-                            <div class="pComment" id="pComment">
-                                <p>${wComment}</p>
-                                <div class="pControl">
-                                    <p><span style="color:grey">${wDate}</span></p>
-                                    <button type="button" id="btn_edit" data-id=${doc.id} class="bh_edit_btn btn btn-primary btn_edit ">수정하기</button>
-                                    <button type="button" id="btn_delete" data-id=${doc.id} class="bh_del_btn btn btn-secondary btn_delete " >삭제하기</button>
-                                    </div>
-                                    </div>
-                                    </div>
-                                    </div>`;
-                                    $('#postsGroup').prepend(temp_html);
-                                });
-
-
-                                //등록 버튼 클릭 시 파이어베이스에 아래의 데이터를 업로드
-                                $('#btn_post').click(async function () {
-                                    const data = {
-                                        wName: $('#wName').val(),
-                                        wPassword: $('#wPassword').val(),
-                                        wComment: $('#wComment').val(),
-                                        wIcon: $('#changeIcon option:selected').val(),
-                                    };
-
-                                    if (!data.wName || !data.wPassword || !data.wComment) {
-                                        alert('이름, 비밀번호, 내용을 모두 입력해주세요.');
-                                        return;
-                                    }
-
-                                    console.log(data.wName)
-                                    let date = new Date();
-                                    let wDate = date.getFullYear().toString() + ". " + (date.getMonth() + 1).toString().padStart(2, '0') + ". " + date.getDate().toString().padStart(2, '0');
-                                    let docId = date.toString().split(' ').join('');
-
-                                    let my_doc = {
-                                        '이름': data.wName,
-                                        '비밀번호': data.wPassword,
-                                        '내용': data.wComment,
-                                        '작성일': wDate,
-                                        '아이콘': data.wIcon,
-                                    };
-
-                                    await setDoc(doc(db, "coding-three", docId), my_doc);
-                                    alert('게시글이 등록되었습니다.');
-
-                                    window.location.reload();
-                                })
-
-                                // 이거 함수 위에  그냥 아래로 빼고 버튼 눌렀을 때 도 스크립트로 내려서 버튼엔 onclick 없앴음
-
-                                // 삭제 버튼
-                                async function deletePost(doc_id) {
-
-                                    let targetDoc = await getDoc(doc(db, "coding-three", doc_id));
-
-                                    // 가져온 문서를 데이터로 변환
-                                    let row = targetDoc.data()
-
-                                    // 그 안에 있는 .pst_pw 가져오기
-                                    let wPassword = row.비밀번호;
-
-                                    const really = prompt("작성 시 입력한 비밀번호를 입력하세요." + "");
-                                    console.log(really)
-
-                                    if (really === 'codingthree' || really == wPassword) {
-                                        try {
-                                            await deleteDoc(doc(db, 'coding-three', doc_id));
-                                            alert('삭제되었습니다.');
-                                            window.location.reload();
-                                        } catch (error) {
-                                            console.error('삭제 중 오류 발생:', error);
-                                            alert('삭제 중 오류가 발생했습니다.');
-                                        }
-                                    } else if (really == null) {
-                                    } else {
-                                        alert('비밀번호가 일치하지 않습니다.');
-                                    }
-                                }
-
-                                $('.btn_delete').click(async function () {
-                                    let doc_id = $(this).data("id");
-                                    deletePost(doc_id)
-                                });
-
-                                </script>
                                 <!--리셋 버튼 스크립트-->
                                 <script>
                                     function resetForm() {
