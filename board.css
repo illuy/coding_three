@@ -106,18 +106,19 @@
 /* ------------------------------------------------------- */
 .form-log{
 display: flex;
-border:1px solid red;
+border:1px solid #ff0000;
 height: 40px;
+margin-bottom:20px;
 
 }
 .form-log > div:nth-child(1){
-    margin-right:20px;
-    margin-bottom:20px;
+    /* margin-right:20px;
+    margin-bottom:20px; */
 }
 .wForm2 label{
     display: block;
     position: absolute;
-
+    transition: 0.5s;
 }
 .wForm2 label.active{
     transform: translate(0,-20px);
@@ -126,16 +127,21 @@ height: 40px;
 .wForm2 input{
     outline: none;
     background-color: transparent;
-    
-    
+    border:none;   
+    display: block;
+}
+.wForm2 label.active+input{
+    border-bottom:1px solid red;
 }
 .wForm2 input:focus{
-
+    
 }
 
 textarea{
     width: 381px;
     height: 109px;
+    background-color: transparent;
+    border: none;
 }
 
 
