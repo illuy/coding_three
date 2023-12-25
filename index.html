@@ -314,15 +314,6 @@
                         <button type="button" id="btn_reset" class="btn btn-primary" onclick="resetForm()">리셋</button>
                     </div>
 
-                    <!--리셋 버튼 스크립트-->
-                    <script>
-                        function resetForm() {
-                            var formControls = document.getElementsByClassName('form-control');
-                            for (var i = 0; i < formControls.length; i++) {
-                                formControls[i].value = "";
-                            }
-                        }
-                    </script>
 
                 </div>
             </div>
@@ -419,98 +410,107 @@
             let wIcon = row['아이콘'];
 
             let temp_html = `
-                <div class="posts col-md-6" id="posts">
-                    <div class="pIcon">
-                        <img src="${wIcon}" width="80" style="border:2px solid #000000;">
+            <div class="posts col-md-6" id="posts">
+                <div class="pIcon">
+                    <img src="${wIcon}" width="80" style="border:2px solid #000000;">
                     </div>
                     <div class="pContent">
                         <div class="pName" id="pName">
                             <h4>${row['이름']}</h4>
-                        </div>
-                        <div class="pComment" id="pComment">
-                            <p>${wComment}</p>
-                            <div class="pControl">
-                                <p><span style="color:grey">${wDate}</span></p>
-                                <button type="button" id="btn_edit" data-id=${doc.id} class="bh_edit_btn btn btn-primary btn_edit ">수정하기</button>
-                                <button type="button" id="btn_delete" data-id=${doc.id} class="bh_del_btn btn btn-secondary btn_delete " >삭제하기</button>
                             </div>
-                        </div>
-                    </div>
-                </div>`;
-            $('#postsGroup').prepend(temp_html);
-        });
+                            <div class="pComment" id="pComment">
+                                <p>${wComment}</p>
+                                <div class="pControl">
+                                    <p><span style="color:grey">${wDate}</span></p>
+                                    <button type="button" id="btn_edit" data-id=${doc.id} class="bh_edit_btn btn btn-primary btn_edit ">수정하기</button>
+                                    <button type="button" id="btn_delete" data-id=${doc.id} class="bh_del_btn btn btn-secondary btn_delete " >삭제하기</button>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </div>`;
+                                    $('#postsGroup').prepend(temp_html);
+                                });
 
 
-        //등록 버튼 클릭 시 파이어베이스에 아래의 데이터를 업로드
-        $('#btn_post').click(async function () {
-            const data = {
-                wName: $('#wName').val(),
-                wPassword: $('#wPassword').val(),
-                wComment: $('#wComment').val(),
-                wIcon: $('#changeIcon option:selected').val(),
-            };
+                                //등록 버튼 클릭 시 파이어베이스에 아래의 데이터를 업로드
+                                $('#btn_post').click(async function () {
+                                    const data = {
+                                        wName: $('#wName').val(),
+                                        wPassword: $('#wPassword').val(),
+                                        wComment: $('#wComment').val(),
+                                        wIcon: $('#changeIcon option:selected').val(),
+                                    };
 
-            if (!data.wName || !data.wPassword || !data.wComment) {
-                alert('이름, 비밀번호, 내용을 모두 입력해주세요.');
-                return;
-            }
+                                    if (!data.wName || !data.wPassword || !data.wComment) {
+                                        alert('이름, 비밀번호, 내용을 모두 입력해주세요.');
+                                        return;
+                                    }
 
-            console.log(data.wName)
-            let date = new Date();
-            let wDate = date.getFullYear().toString() + ". " + (date.getMonth() + 1).toString().padStart(2, '0') + ". " + date.getDate().toString().padStart(2, '0');
-            let docId = date.toString().split(' ').join('');
+                                    console.log(data.wName)
+                                    let date = new Date();
+                                    let wDate = date.getFullYear().toString() + ". " + (date.getMonth() + 1).toString().padStart(2, '0') + ". " + date.getDate().toString().padStart(2, '0');
+                                    let docId = date.toString().split(' ').join('');
 
-            let my_doc = {
-                '이름': data.wName,
-                '비밀번호': data.wPassword,
-                '내용': data.wComment,
-                '작성일': wDate,
-                '아이콘': data.wIcon,
-            };
+                                    let my_doc = {
+                                        '이름': data.wName,
+                                        '비밀번호': data.wPassword,
+                                        '내용': data.wComment,
+                                        '작성일': wDate,
+                                        '아이콘': data.wIcon,
+                                    };
 
-            await setDoc(doc(db, "coding-three", docId), my_doc);
-            alert('게시글이 등록되었습니다.');
+                                    await setDoc(doc(db, "coding-three", docId), my_doc);
+                                    alert('게시글이 등록되었습니다.');
 
-            window.location.reload();
-        })
+                                    window.location.reload();
+                                })
 
-        // 이거 함수 위에  그냥 아래로 빼고 버튼 눌렀을 때 도 스크립트로 내려서 버튼엔 onclick 없앴음
+                                // 이거 함수 위에  그냥 아래로 빼고 버튼 눌렀을 때 도 스크립트로 내려서 버튼엔 onclick 없앴음
 
-        // 삭제 버튼
-        async function deletePost(doc_id) {
+                                // 삭제 버튼
+                                async function deletePost(doc_id) {
 
-            let targetDoc = await getDoc(doc(db, "coding-three", doc_id));
+                                    let targetDoc = await getDoc(doc(db, "coding-three", doc_id));
 
-            // 가져온 문서를 데이터로 변환
-            let row = targetDoc.data()
+                                    // 가져온 문서를 데이터로 변환
+                                    let row = targetDoc.data()
 
-            // 그 안에 있는 .pst_pw 가져오기
-            let wPassword = row.비밀번호;
+                                    // 그 안에 있는 .pst_pw 가져오기
+                                    let wPassword = row.비밀번호;
 
-            const really = prompt("작성 시 입력한 비밀번호를 입력하세요." + "");
-            console.log(really)
+                                    const really = prompt("작성 시 입력한 비밀번호를 입력하세요." + "");
+                                    console.log(really)
 
-            if (really === 'codingthree' || really == wPassword) {
-                try {
-                    await deleteDoc(doc(db, 'coding-three', doc_id));
-                    alert('삭제되었습니다.');
-                    window.location.reload();
-                } catch (error) {
-                    console.error('삭제 중 오류 발생:', error);
-                    alert('삭제 중 오류가 발생했습니다.');
-                }
-            } else if (really == null) {
-            } else {
-                alert('비밀번호가 일치하지 않습니다.');
-            }
-        }
+                                    if (really === 'codingthree' || really == wPassword) {
+                                        try {
+                                            await deleteDoc(doc(db, 'coding-three', doc_id));
+                                            alert('삭제되었습니다.');
+                                            window.location.reload();
+                                        } catch (error) {
+                                            console.error('삭제 중 오류 발생:', error);
+                                            alert('삭제 중 오류가 발생했습니다.');
+                                        }
+                                    } else if (really == null) {
+                                    } else {
+                                        alert('비밀번호가 일치하지 않습니다.');
+                                    }
+                                }
 
-        $('.btn_delete').click(async function () {
-            let doc_id = $(this).data("id");
-            deletePost(doc_id)
-        });
+                                $('.btn_delete').click(async function () {
+                                    let doc_id = $(this).data("id");
+                                    deletePost(doc_id)
+                                });
 
-    </script>
+                                </script>
+                                <!--리셋 버튼 스크립트-->
+                                <script>
+                                    function resetForm() {
+                                        var formControls = document.getElementsByClassName('form-control');
+                                        for (var i = 0; i < formControls.length; i++) {
+                                            formControls[i].value = "";
+                                        }
+                                    }
+                                </script>
 
 
 </body>
