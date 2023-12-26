@@ -88,8 +88,8 @@
                                 <p>${wComment}</p>
                                 <div class="pControl">
                                     <p><span style="color:grey">${wDate}</span></p>
-                                    <button type="button" id="btn_edit" data-id=${doc.id} class="bh_edit_btn btn btn-primary btn_edit ">수정하기</button>
-                                    <button type="button" id="btn_delete" data-id=${doc.id} class="bh_del_btn btn btn-secondary btn_delete " >삭제하기</button>
+                                    <button type="button" id="btn_edit" data-id=${doc.id} class="borad-button bh_edit_btn btn btn-primary btn_edit ">수정하기</button>
+                                    <button type="button" id="btn_delete" data-id=${doc.id} class="borad-button bh_del_btn btn btn-secondary btn_delete " >삭제하기</button>
                                     </div>
                                     </div>
                                     </div>
@@ -537,11 +537,10 @@
                     </div>
                     <div class="form-floating mb-3">
                         <label for="wComment">응원의 한마디!</label>
-                        <textarea class="form-control" id="wComment" cols="30" rows="10"></textarea>
-
+                        <textarea class="form-control textbox" id="wComment"></textarea>
                     </div>
 
-                    <div class="wBtn">
+                    <div class="wBtn postBox">
                         <button type="button" id="btn_post" class="btn btn-primary button">등록</button>
                         <button type="button" id="btn_reset" class="btn btn-primary button"
                             onclick="resetForm()">리셋</button>
@@ -594,8 +593,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                        <button type="button" class="btn btn-primary" id="btn_save_edit">저장</button>
+                        <button type="button" class="borad-button btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                        <button type="button" class="borad-button btn btn-primary" id="btn_save_edit">저장</button>
                     </div>
                 </div>
             </div>
