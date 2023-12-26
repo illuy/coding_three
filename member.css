@@ -7,16 +7,11 @@
 }
 .container {
     display: grid;
-    grid-template-columns: 0.9fr 50px;
+    grid-template-columns: 1200px 50px;
 }
 
 .tab_btn{
     padding: 50px 0 0 0;
-}
-
-.tab_btn li {
-    list-style: none;
-    cursor: pointer;
 }
 
 .tab-cont > div {
@@ -29,7 +24,7 @@
 
 .tab-cont .grd_hz {
     display: grid;
-    grid-template-columns: max-content max-content;
+    grid-template-columns: 730px max-content;
 }
 
 .ld {
@@ -43,4 +38,29 @@
 
 #MEMBER h1 {
     margin-top: 50px;
+}
+
+#MEMBER ul{
+    list-style-position: inside;
+    padding-left:20px;
+    list-style-type:disc;
+    font-size: 16px;
+    font-family: 'SCoreDream4';
+}
+
+#MEMBER .tab_btn > li {
+    list-style: none;
+    cursor: pointer;
+}
+
+#MEMBER ul > li{
+    list-style-type:disc;
+    font-size: 16px;
+    font-family: 'SCoreDream4';
+}
+
+#MEMBER li{
+    list-style-type:decimal;
+    font-size: 16px;
+    font-family: 'SCoreDream4';
 }
