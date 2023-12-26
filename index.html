@@ -175,32 +175,44 @@
             let targetDoc = await getDoc(doc(db, "coding-three", doc_id));
             let rowData = targetDoc.data();
 
-            // 수정할 내용을 모달에 적용
-            $('#edit_wName').val(rowData['이름']);
-            $('#edit_wComment').val(rowData['내용']);
+            // 비밀번호 입력
+            const userPassword = prompt("게시물을 수정하려면 비밀번호를 입력하세요.");
 
-            // 모달을 표시
-            $('#editModal').modal('show');
+            // 취소 시
+            if (userPassword === null) {
+                alert('수정이 취소되었습니다.');
+                return;
+            }
 
-           // 저장하기 
-            $('#btn_save_edit').click(async function () {
-                // 사용자가 수정한 내용을 가져옴
-                const updatedData = {
-                    '내용': $('#edit_wComment').val(),
-                    '이름': $('#edit_wName').val(),
-                };
+            // 입력한 비밀번호가 일치하는지 확인
+            if (userPassword === rowData['비밀번호']) {
+                // 수정할 내용을 모달에 적용
+                $('#edit_wName').val(rowData['이름']);
+                $('#edit_wComment').val(rowData['내용']);
 
-                console.log(updatedData); // 값이 제대로 가져와지는지 확인
+                // 모달을 표시
+                $('#editModal').modal('show');
 
-                // 파이어베이스 문서 업데이트
-                await updateDoc(doc(db, 'coding-three', doc_id), updatedData);
+                // 저장하기
+                $('#btn_save_edit').click(async function () {
+                    // 사용자가 수정한 내용을 가져옴
+                    const updatedData = {
+                        '내용': $('#edit_wComment').val(),
+                        '이름': $('#edit_wName').val(),
+                    };
 
-                // 모달 닫기
-                $('#editModal').modal('hide');
+                    // 파이어베이스 문서 업데이트
+                    await updateDoc(doc(db, 'coding-three', doc_id), updatedData);
 
-                // 화면 새로고침
-                location.reload();
-            });
+                    // 모달 닫기
+                    $('#editModal').modal('hide');
+
+                    // 화면 새로고침
+                    location.reload();
+                });
+            } else {
+                alert('비밀번호가 일치하지 않습니다.');
+            }
         });
 
 
