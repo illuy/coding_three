@@ -81,7 +81,9 @@
     width: 660px;
     border: 2px solid #121212;
 }
-
+.pContent h4{
+    margin-bottom:0;
+}
 .pName {
     background-color: #73a077;
     color: #ffffff;
