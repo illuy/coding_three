@@ -171,38 +171,53 @@
         $('.btn_edit').click(async function () {
             let doc_id = $(this).data("id");
 
-            // 해당 문서의 내용을 가져오기
-            let targetDoc = await getDoc(doc(db, "coding-three", doc_id));
-            let rowData = targetDoc.data();
+            // 비밀번호 확인
+            const enteredPassword = prompt('게시글의 비밀번호를 입력하세요:');
+            const docRef = doc(db, 'coding-three', doc_id);
+            const docSnapshot = await getDoc(docRef);
 
-            // 수정할 내용을 모달에 적용
-            $('#edit_wName').val(rowData['이름']);
-            $('#edit_wComment').val(rowData['내용']);
+            if (docSnapshot.exists()) {
+                const storedPassword = docSnapshot.data().비밀번호;
 
-            // 모달을 표시
-            $('#editModal').modal('show');
+                if (enteredPassword === storedPassword) {
+                    // 비밀번호가 일치하면 수정 작업 진행
+                    let targetDoc = await getDoc(docRef);
+                    let rowData = targetDoc.data();
 
-           // 저장하기 
-            $('#btn_save_edit').click(async function () {
-                // 사용자가 수정한 내용을 가져옴
-                const updatedData = {
-                    '내용': $('#edit_wComment').val(),
-                    '이름': $('#edit_wName').val(),
-                };
+                    // 수정할 내용을 모달에 적용
+                    $('#edit_wName').val(rowData['이름']);
+                    $('#edit_wComment').val(rowData['내용']);
 
-                console.log(updatedData); // 값이 제대로 가져와지는지 확인
+                    // 모달을 표시
+                    $('#editModal').modal('show');
 
-                // 파이어베이스 문서 업데이트
-                await updateDoc(doc(db, 'coding-three', doc_id), updatedData);
+                    // 저장하기 
+                    $('#btn_save_edit').click(async function () {
+                        // 사용자가 수정한 내용을 가져옴
+                        const updatedData = {
+                            '내용': $('#edit_wComment').val(),
+                            '이름': $('#edit_wName').val(),
+                        };
 
-                // 모달 닫기
-                $('#editModal').modal('hide');
+                        console.log(updatedData); // 값이 제대로 가져와지는지 확인
 
-                // 화면 새로고침
-                location.reload();
-            });
+                        // 파이어베이스 문서 업데이트
+                        await updateDoc(docRef, updatedData);
+
+                        // 모달 닫기
+                        $('#editModal').modal('hide');
+
+                        // 화면 새로고침
+                        location.reload();
+                    });
+                } else if (enteredPassword == null) {
+                }else {
+                    alert('비밀번호가 일치하지 않습니다.');
+                }
+            } else {
+                alert('해당 문서를 찾을 수 없습니다.');
+            }
         });
-
 
     </script>
 
@@ -427,7 +442,7 @@
                                     <ul>
                                         <li>본인 할일 하면서 귀는 열려있는 스타일?</li>
                                         <li>같이 고민할 것이 있으면 같이 생각 해본다.<br>(내 할 일에 지장 안 가는 한에서..)</li>
-                                        
+
                                     </ul>
                                 </li>
                                 <br>
@@ -563,28 +578,28 @@
         <!-- 수정하기 모달 -->
         <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
             <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="editModalLabel">게시글 수정</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">게시글 수정</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="edit_wName" class="form-label">이름</label>
+                            <input type="text" class="form-control" id="edit_wName">
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_wComment" class="form-label">내용</label>
+                            <textarea class="form-control" id="edit_wComment"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                        <button type="button" class="btn btn-primary" id="btn_save_edit">저장</button>
+                    </div>
                 </div>
-                <div class="modal-body">
-                  <div class="mb-3">
-                    <label for="edit_wName" class="form-label">이름</label>
-                    <input type="text" class="form-control" id="edit_wName">
-                  </div>
-                  <div class="mb-3">
-                    <label for="edit_wComment" class="form-label">내용</label>
-                    <textarea class="form-control" id="edit_wComment"></textarea>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                  <button type="button" class="btn btn-primary" id="btn_save_edit">저장</button>
-                </div>
-              </div>
             </div>
-          </div>
+        </div>
     </main>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -600,7 +615,7 @@
             }
         }
     </script>
-    
+
 
 
 </body>
