@@ -1,6 +1,7 @@
 @charset "utf-8";
 
 #BOARD{
+    
     height: auto;
     padding-top:110px;
     display: flex;
@@ -9,9 +10,7 @@
     align-items: center;
 }
 .write {
-    /* background-color: aqua; */
-    /* border: 2px solid #000000; */
-    
+    background-color: #A6CF98;
     border-radius: 10px;
     border:2px solid #121212;
     display: flex;
@@ -23,6 +22,7 @@
 }
 
 .wForm1 {
+    /* background-color: #4F6F52; */
     width: 25%;
     display: flex;
     flex-direction: column;
@@ -70,6 +70,7 @@
 }
 
 .pIcon {
+    background-color: #4F6F52;
     margin-right: 20px;
 }
 
@@ -97,6 +98,11 @@
 
 #wComment {
     height: 150px;
+}
+
+.borad-image {
+    border: 1px solid #777;
+    border-radius: 10px;
 }
 
 /* ------------------------------------------------------- */
