@@ -167,7 +167,7 @@
             deletePost(doc_id)
         });
 
-        // "수정하기" 버튼 클릭 시 이벤트 핸들러
+        // 수정하기
         $('.btn_edit').click(async function () {
             let doc_id = $(this).data("id");
 
@@ -182,7 +182,7 @@
             // 모달을 표시
             $('#editModal').modal('show');
 
-           // "저장" 버튼 클릭 시 이벤트 핸들러
+           // 저장하기 
             $('#btn_save_edit').click(async function () {
                 // 사용자가 수정한 내용을 가져옴
                 const updatedData = {
@@ -192,7 +192,7 @@
 
                 console.log(updatedData); // 값이 제대로 가져와지는지 확인
 
-                // updateDoc 함수를 사용하여 파이어베이스 문서 업데이트
+                // 파이어베이스 문서 업데이트
                 await updateDoc(doc(db, 'coding-three', doc_id), updatedData);
 
                 // 모달 닫기
