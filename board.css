@@ -1,6 +1,7 @@
 @charset "utf-8";
 
 #BOARD{
+    
     height: auto;
     padding-top:110px;
     display: flex;
@@ -9,7 +10,7 @@
     align-items: center;
 }
 .write {
-    /* background-color: aqua; */
+    background-color: #A6CF98;
     border: 2px solid #000000;
     border-radius: 10px;
     display: flex;
@@ -109,6 +110,17 @@
 
 #wComment {
     height: 150px;
+}
+
+.borad-image {
+    border: 1px solid #777;
+    border-radius: 10px;
+}
+
+.image-select {
+    background-color: white;
+    color: black
+;
 }
 
 /* ------------------------------------------------------- */

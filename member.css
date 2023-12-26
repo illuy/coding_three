@@ -29,10 +29,12 @@
 
 .ld {
     display: inline;
-    font-size: 12px;
+    font-size: 14px;
+    font-weight: bold;
     border: solid skyblue 1px;
+    padding: 3px 8px 3px 8px;
+    margin-bottom: 20px;
     background-color: skyblue;
-    padding: 1px;
     border-radius: 5px;
 }
 
@@ -63,4 +65,9 @@
     list-style-type:decimal;
     font-size: 16px;
     font-family: 'SCoreDream4';
+}
+
+section h1 {
+    font-family: 'SCoreDream5', sans-serif;
+    font-weight: bold;
 }
