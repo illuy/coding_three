@@ -157,6 +157,7 @@
                     // 수정할 내용을 모달에 적용
                     $('#edit_wName').val(rowData['이름']);
                     $('#edit_wComment').val(rowData['내용']);
+                    $('#edit_wIcon').val(rowData['아이콘']);
 
                     // 모달을 표시
                     $('#editModal').modal('show');
@@ -167,6 +168,7 @@
                         const updatedData = {
                             '내용': $('#edit_wComment').val(),
                             '이름': $('#edit_wName').val(),
+                            '아이콘' : $('#edit_wIcon').val(),
                         };
 
                         console.log(updatedData); // 값이 제대로 가져와지는지 확인
@@ -534,6 +536,17 @@
                         <div class="mb-3">
                             <label for="edit_wComment" class="form-label">내용</label>
                             <textarea class="form-control" id="edit_wComment"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_wIcon" class="form-label">아이콘</label>
+                            <select id="edit_wIcon" style="width:100%">
+                                <option value="image/board_icon01.png" selected>코딩트리 1</option>
+                                <option value="image/board_icon02.png">코딩트리 2</option>
+                                <option value="image/board_icon03.png">코딩트리 3</option>
+                                <option value="image/board_icon04.png">코딩트리 4</option>
+                                <option value="image/board_icon05.png">코딩트리 5</option>
+                                <option value="image/board_icon06.png">코딩트리 6</option>
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">
