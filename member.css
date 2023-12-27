@@ -6,12 +6,20 @@
     padding:10% 10%;
 }
 .container {
-    display: grid;
-    grid-template-columns: 1200px 50px;
+    /* display: grid;
+    grid-template-columns: 1200px 50px; */
+    display: flex;
+    justify-content: space-between;
 }
 
 .tab_btn{
-    padding: 50px 0 0 0;
+    /* margin-top:50px; */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    
+    
 }
 
 .tab-cont > div {
@@ -23,8 +31,17 @@
 }
 
 .tab-cont .grd_hz {
-    display: grid;
-    grid-template-columns: 730px max-content;
+    display: flex;
+    
+    /* display: grid;
+    grid-template-columns: 730px max-content; */
+}
+.tab-cont .grd_hz >div{
+    margin-right:20px;
+}
+.tab-cont .grd_hz img{
+    width: 500px;
+    height: 600px
 }
 
 .ld {
@@ -39,7 +56,7 @@
 }
 
 #MEMBER h1 {
-    margin-top: 50px;
+    /* margin-top: 50px; */
 }
 
 #MEMBER ul{
@@ -54,6 +71,10 @@
     list-style: none;
     cursor: pointer;
 }
+#MEMBER ol > li{
+    font-size: 18px;
+    font-family: 'SCoreDream5';
+}
 
 #MEMBER ul > li{
     list-style-type:disc;
@@ -61,11 +82,12 @@
     font-family: 'SCoreDream4';
 }
 
-#MEMBER li{
-    list-style-type:decimal;
-    font-size: 16px;
-    font-family: 'SCoreDream4';
+#MEMBER ol{
+    
+    padding:0;
 }
+
+
 
 section h1 {
     font-family: 'SCoreDream5', sans-serif;
@@ -74,5 +96,5 @@ section h1 {
 
 .thumbnail {
     border-radius: 30px;
-    margin-bottom: 45px;
+    /* margin-bottom: 45px; */
 }
