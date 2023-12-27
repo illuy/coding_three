@@ -71,3 +71,8 @@ section h1 {
     font-family: 'SCoreDream5', sans-serif;
     font-weight: bold;
 }
+
+.thumbnail {
+    border-radius: 30px;
+    margin-bottom: 30px;
+}
