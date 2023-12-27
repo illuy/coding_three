@@ -46,6 +46,9 @@
     left: 50%;
     transform: translate(-50%,-50%);
 }
+.tab-cont .grd_hz:nth-child(6) img{
+    top:60%
+}
 .tab-cont .grd_hz > div:nth-child(1){
     width: 500px;
     height: 400px;
