@@ -115,7 +115,7 @@
             let row = targetDoc.data()
             let wPassword = row.비밀번호;
 
-            const really = prompt("작성 시 입력한 비밀번호를 입력하세요." + "");
+            const really = prompt("게시글의 비밀번호를 입력하세요." + "");
 
             if (really === 'codingthree' || really == wPassword) {
                 try {
@@ -142,7 +142,7 @@
             let doc_id = $(this).data("id");
 
             // 비밀번호 확인
-            const enteredPassword = prompt('게시글의 비밀번호를 입력하세요:');
+            const enteredPassword = prompt('게시글의 비밀번호를 입력하세요.');
             const docRef = doc(db, 'coding-three', doc_id);
             const docSnapshot = await getDoc(docRef);
 
