@@ -10,6 +10,12 @@
     
 
 }
+
+#TEAM .container {
+   display: block;
+
+}
+
 #TEAM h1 {
     display: inline-flex;
     font-family: 'SCoreDream8';
@@ -34,20 +40,20 @@
     align-items: flex-end;
     display: flex;
     position: absolute;
-    bottom: 15px;
+    bottom: 9px;
     right: 145px;
 }
 
 #line {
     display: inline-flex;
     margin: 20px;
-    border-left: solid thin #6f6f6f;
+    border-left: solid thin #093001;
     height: 100px;
 }
 
 #grid_vt {
-    display: grid;
-    grid-template-rows: 150px;
+    /* display: grid;
+    grid-template-rows: 150px; */
      transform: translateX(-500px);
      opacity: 0;
      transition: 0.5s 0.2s;
@@ -89,16 +95,22 @@
 .team_tree{
     height: 400px;
     display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
+    /* justify-content: flex-end;
+    align-items: flex-end; */
     transform: translateX(500px);
     opacity: 0;
     transition: 0.5s 0.4s;
-    
-    
+}
+.team_tree article{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
 }
 .team_tree img{
-    width: 100%;
+    height: 100%;
+
 }
 
 
