@@ -40,8 +40,19 @@
     margin-right:20px;
 }
 .tab-cont .grd_hz img{
+    width: 100%;
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    /* width: 500px;
+    height: 600px */
+}
+.tab-cont .grd_hz > div:nth-child(1){
     width: 500px;
-    height: 600px
+    height: 400px;
+    overflow: hidden;
+    position: relative;
 }
 
 .ld {
